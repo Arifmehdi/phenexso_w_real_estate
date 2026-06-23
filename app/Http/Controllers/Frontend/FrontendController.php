@@ -48,79 +48,6 @@ class FrontendController extends Controller
 
     public function index()
     {
-        // $data['categories'] = ProductCategory::where('active', 1)
-        //     ->whereHas('products') // only categories that have at least one product
-        //     ->where('parent_id', null)
-        //     ->select('id', 'name_en', 'name_bn', 'slug', 'image') // select needed fields
-        //     ->get();
-        // $data['products'] = Product::whereActive(true)->get();
-        
-                // Get all active categories with their products
-    $data['categories'] = ProductCategory::where('active', true)
-        ->with(['products' => function($query) {
-            $query->where('active', 1)
-                  ->select('products.id', 'products.name_en',  'products.slug', 'products.featured_image', 'products.price', 'products.discount_price', 'products.selling_price', 'products.feature', 'products.active') // Select only needed fields
-                  ->take(8); // Limit products per category
-        }])
-        ->whereHas('products', function($query) { // Only categories that have products
-            $query->where('active', true);
-        })
-        ->select('id', 'name_en', 'name_bn', 'slug','image', 'active') // Select category fields
-        ->get();
-
-        // dd($data['categories']);
-
-        $data['feature_products'] = Product::whereActive(true)->where('feature',true)->limit(20)->get();
-
-        $data['departments'] = Department::whereActive(true)
-            ->select('image','name_en','name_bn','excerpt_en')
-            ->get();
-        
-        $data['testimonials'] = Testimonial::whereActive(true)
-            ->latest()
-            ->limit(5)
-            ->select('id','name','designation','image','text_en','designation')
-            ->get();
-
-        $data['newses'] = BlogPost::whereActive(true)->limit(3)->get();
-        $data['sliders'] = FrontSlider::whereActive(true)
-            ->select('featured_image','title','description','link')
-            ->get();
-
-        $data['brands'] = Gallery::whereActive(true)
-            ->where('file_type', 'image')
-            ->orderBy('priority', 'asc')
-            ->get();
-
-        $data['sale_products'] = Product::whereActive(true)
-            ->whereNotNull('discount_price')
-            ->latest()
-            ->limit(3)
-            ->get();
-
-        $data['latest_products'] = Product::whereActive(true)
-            ->latest()
-            ->limit(3)
-            ->get();
-
-        $data['best_products'] = Product::whereActive(true)
-            ->where('feature', true)
-            ->latest()
-            ->limit(3)
-            ->get();
-
-        $data['popular_products'] = Product::whereActive(true)
-            ->orderByDesc('click_count')
-            ->limit(3)
-            ->get();
-
-        $data['content'] = \App\Models\PageContent::where('page_slug', 'home')->first();
-
-        return view('website.index', $data);
-    }
-
-    public function realestate()
-    {
         $data['featuredProperties'] = collect();
         $data['cities'] = collect();
         $data['bestProperties'] = collect();
@@ -271,6 +198,68 @@ class FrontendController extends Controller
     public function contact()
     {
         return view('website.contact');
+    }
+
+    public function properties(Request $request)
+    {
+        $query = Product::whereActive(true);
+
+        if ($request->filled('keyword')) {
+            $keyword = $request->get('keyword');
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name_en', 'like', '%' . $keyword . '%')
+                  ->orWhere('description_en', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->get('status'));
+        }
+
+        if ($request->filled('property_type')) {
+            $query->where('type', $request->get('property_type'));
+        }
+
+        if ($request->filled('bathrooms')) {
+            $query->where('bathrooms', $request->get('bathrooms'));
+        }
+
+        if ($request->filled('bedrooms')) {
+            $query->where('bedrooms', $request->get('bedrooms'));
+        }
+
+        if ($request->filled('min_area')) {
+            $query->where('sqft', '>=', $request->get('min_area'));
+        }
+
+        if ($request->filled('max_area')) {
+            $query->where('sqft', '<=', $request->get('max_area'));
+        }
+
+        switch ($request->get('sort')) {
+            case 'price_low':
+                $query->orderBy('final_price', 'asc');
+                break;
+            case 'price_high':
+                $query->orderBy('final_price', 'desc');
+                break;
+            case 'newest':
+                $query->latest();
+                break;
+            default:
+                $query->latest();
+                break;
+        }
+
+        $properties = $query->paginate(12)->appends($request->all());
+
+        $featuredProperties = Product::whereActive(true)
+            ->where('feature', true)
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view('website.properties', compact('properties', 'featuredProperties'));
     }
 
     public function service()
@@ -509,9 +498,33 @@ class FrontendController extends Controller
 
 
 
-    public function news()
+    public function news(Request $request)
     {
-        $data['news'] = BlogPost::whereActive(true)->whereStatus('published')->latest()->paginate(12);
+        $query = BlogPost::whereActive(true)->whereStatus('published');
+
+        if ($request->filled('search')) {
+            $keyword = $request->get('search');
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', '%' . $keyword . '%')
+                  ->orWhere('excerpt', 'like', '%' . $keyword . '%')
+                  ->orWhere('description_en', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->get('category'));
+        }
+
+        $data['news'] = $query->latest()->paginate(12)->appends($request->all());
+
+        $data['newsCategories'] = \App\Models\BlogCategory::withCount('posts')->get();
+
+        $data['featuredProperties'] = Product::whereActive(true)
+            ->where('feature', true)
+            ->latest()
+            ->limit(3)
+            ->get();
+
         return view('website.blog', $data);
     }
 
@@ -539,6 +552,12 @@ class FrontendController extends Controller
                                 ->get();
 
         $data['newsCategories'] = \App\Models\BlogCategory::withCount('posts')->get();
+
+        $data['featuredProperties'] = Product::whereActive(true)
+            ->where('feature', true)
+            ->latest()
+            ->limit(3)
+            ->get();
 
         $data['news'] = $news;
         return view('website.blog_details', $data);

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div style="margin-bottom:30px;">
-                    <img src="{{ asset('home_finance/images/logo.png') }}" alt="logo" style="max-height:45px;margin-bottom:20px;">
+                    <img src="{{ asset('frontend/images/logo.png') }}" alt="logo" style="max-height:45px;margin-bottom:20px;">
                     <p style="color:#999;line-height:1.8;font-size:15px;margin-bottom:20px;">We're reimagining how you buy, sell and rent. It's now easier to get into a place you love. So let's do this, together.</p>
                     <div style="display:flex;gap:10px;">
                         <a href="#" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(224,42,39,0.4);color:#E02A27;text-decoration:none;transition:all 0.3s;"><i class="fa fa-facebook"></i></a>
@@ -18,9 +18,9 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <h4 style="color:#fff;font-size:20px;font-weight:700;margin-bottom:25px;padding-bottom:12px;position:relative;">Contact Info</h4>
                 <ul style="list-style:none;padding:0;margin:0 0 25px;">
-                    <li style="display:flex;gap:12px;margin-bottom:15px;color:#999;font-size:15px;"><i class="fa fa-map-marker" style="color:#E02A27;font-size:18px;margin-top:3px;"></i> Collins Street West, Victoria 8007</li>
-                    <li style="display:flex;gap:12px;margin-bottom:15px;color:#999;font-size:15px;"><i class="fa fa-phone" style="color:#E02A27;font-size:18px;margin-top:3px;"></i> +1 246-345-0699</li>
-                    <li style="display:flex;gap:12px;margin-bottom:15px;color:#999;font-size:15px;"><i class="fa fa-envelope" style="color:#E02A27;font-size:18px;margin-top:3px;"></i> info@findhouse.com</li>
+                    <li style="display:flex;gap:12px;margin-bottom:15px;color:#999;font-size:15px;"><i class="fa fa-map-marker" style="color:#E02A27;font-size:18px;margin-top:3px;"></i> {{ $ws->contact_address }} </li>
+                    <li style="display:flex;gap:12px;margin-bottom:15px;color:#999;font-size:15px;"><i class="fa fa-phone" style="color:#E02A27;font-size:18px;margin-top:3px;"></i>{{ $ws->contact_mobile }}</li>
+                    <li style="display:flex;gap:12px;margin-bottom:15px;color:#999;font-size:15px;"><i class="fa fa-envelope" style="color:#E02A27;font-size:18px;margin-top:3px;"></i> {{ $ws->contact_email }}</li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-6 mb-4">

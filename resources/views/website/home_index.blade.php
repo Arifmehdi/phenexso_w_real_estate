@@ -560,7 +560,7 @@
                         <div class="item">
                             <div class="feat_property home3">
                                 <div class="thumb">
-                                    <img class="img-whp" src="{{ asset('home_finance/images/property/fp1.jpg') }}" alt="{{ $property->title ?? 'Property' }}">
+                                    <img class="img-whp" src="{{ asset('frontend/images/property/fp1.jpg') }}" alt="{{ $property->title ?? 'Property' }}">
                                     <div class="thmb_cntnt">
                                         <ul class="tag mb0">
                                             <li class="list-inline-item"><a href="#">{{ $property->type == 'rent' ? 'For Rent' : 'For Sale' }}</a></li>
@@ -593,7 +593,7 @@
                         <div class="item">
                             <div class="feat_property home3">
                                 <div class="thumb">
-                                    <img class="img-whp" src="{{ asset('home_finance/images/property/fp1.jpg') }}" alt="fp1.jpg">
+                                    <img class="img-whp" src="{{ asset('frontend/images/property/fp1.jpg') }}" alt="fp1.jpg">
                                     <div class="thmb_cntnt">
                                         <ul class="tag mb0">
                                             <li class="list-inline-item"><a href="#">For Rent</a></li>
@@ -642,7 +642,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl">
                     <div class="properti_city">
                         <div class="thumb">
-                            <img class="img-fluid w100" src="{{ asset('home_finance/images/property/pc7.jpg') }}" alt="{{ $city->name ?? 'City' }}">
+                            <img class="img-fluid w100" src="{{ asset('frontend/images/property/pc7.jpg') }}" alt="{{ $city->name ?? 'City' }}">
                         </div>
                         <div class="overlay">
                             <div class="details">
@@ -656,7 +656,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl">
                     <div class="properti_city">
                         <div class="thumb">
-                            <img class="img-fluid w100" src="{{ asset('home_finance/images/property/pc7.jpg') }}" alt="pc7.jpg">
+                            <img class="img-fluid w100" src="{{ asset('frontend/images/property/pc7.jpg') }}" alt="pc7.jpg">
                         </div>
                         <div class="overlay">
                             <div class="details">
@@ -669,7 +669,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl">
                     <div class="properti_city">
                         <div class="thumb">
-                            <img class="img-fluid w100" src="{{ asset('home_finance/images/property/pc8.jpg') }}" alt="pc8.jpg">
+                            <img class="img-fluid w100" src="{{ asset('frontend/images/property/pc8.jpg') }}" alt="pc8.jpg">
                         </div>
                         <div class="overlay">
                             <div class="details">
@@ -682,7 +682,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl">
                     <div class="properti_city">
                         <div class="thumb">
-                            <img class="img-fluid w100" src="{{ asset('home_finance/images/property/pc9.jpg') }}" alt="pc9.jpg">
+                            <img class="img-fluid w100" src="{{ asset('frontend/images/property/pc9.jpg') }}" alt="pc9.jpg">
                         </div>
                         <div class="overlay">
                             <div class="details">
@@ -695,7 +695,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl">
                     <div class="properti_city">
                         <div class="thumb">
-                            <img class="img-fluid w100" src="{{ asset('home_finance/images/property/pc10.jpg') }}" alt="pc10.jpg">
+                            <img class="img-fluid w100" src="{{ asset('frontend/images/property/pc10.jpg') }}" alt="pc10.jpg">
                         </div>
                         <div class="overlay">
                             <div class="details">
@@ -708,7 +708,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl">
                     <div class="properti_city">
                         <div class="thumb">
-                            <img class="img-fluid w100" src="{{ asset('home_finance/images/property/pc11.jpg') }}" alt="pc11.jpg">
+                            <img class="img-fluid w100" src="{{ asset('frontend/images/property/pc11.jpg') }}" alt="pc11.jpg">
                         </div>
                         <div class="overlay">
                             <div class="details">
@@ -752,7 +752,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feat_property home3">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/property/fp4.jpg') }}" alt="{{ $property->title ?? 'Property' }}">
+                            <img class="img-whp" src="{{ asset('frontend/images/property/fp4.jpg') }}" alt="{{ $property->title ?? 'Property' }}">
                             <div class="thmb_cntnt">
                                 <ul class="tag mb0">
                                     <li class="list-inline-item"><a href="#">{{ $property->type == 'rent' ? 'For Rent' : 'For Sale' }}</a></li>
@@ -785,7 +785,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feat_property home3">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/property/fp4.jpg') }}" alt="fp4.jpg">
+                            <img class="img-whp" src="{{ asset('frontend/images/property/fp4.jpg') }}" alt="fp4.jpg">
                             <div class="thmb_cntnt">
                                 <ul class="tag mb0">
                                     <li class="list-inline-item"><a href="#">For Rent</a></li>
@@ -815,7 +815,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feat_property home3">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/property/fp5.jpg') }}" alt="fp5.jpg">
+                            <img class="img-whp" src="{{ asset('frontend/images/property/fp5.jpg') }}" alt="fp5.jpg">
                             <div class="thmb_cntnt">
                                 <ul class="tag mb0">
                                     <li class="list-inline-item"><a href="#">For Rent</a></li>
@@ -845,7 +845,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="feat_property home3">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/property/fp6.jpg') }}" alt="fp6.jpg">
+                            <img class="img-whp" src="{{ asset('frontend/images/property/fp6.jpg') }}" alt="fp6.jpg">
                             <div class="thmb_cntnt">
                                 <ul class="tag mb0">
                                     <li class="list-inline-item"><a href="#">For Rent</a></li>
@@ -956,7 +956,7 @@
                         <div class="item">
                             <div class="testimonial_grid">
                                 <div class="thumb">
-                                    <img src="{{ asset('home_finance/images/testimonial/1.jpg') }}" alt="{{ $testimonial->name ?? 'Testimonial' }}">
+                                    <img src="{{ asset('frontend/images/testimonial/1.jpg') }}" alt="{{ $testimonial->name ?? 'Testimonial' }}">
                                 </div>
                                 <div class="details">
                                     <h4>{{ $testimonial->name ?? 'Augusta Silva' }}</h4>
@@ -969,7 +969,7 @@
                         <div class="item">
                             <div class="testimonial_grid">
                                 <div class="thumb">
-                                    <img src="{{ asset('home_finance/images/testimonial/1.jpg') }}" alt="1.jpg">
+                                    <img src="{{ asset('frontend/images/testimonial/1.jpg') }}" alt="1.jpg">
                                 </div>
                                 <div class="details">
                                     <h4>Augusta Silva</h4>
@@ -1000,7 +1000,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4">
                     <div class="for_blog feat_property">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/blog/bh1.jpg') }}" alt="{{ $blog->title ?? 'Blog' }}">
+                            <img class="img-whp" src="{{ asset('frontend/images/blog/bh1.jpg') }}" alt="{{ $blog->title ?? 'Blog' }}">
                         </div>
                         <div class="details">
                             <div class="tc_content">
@@ -1010,7 +1010,7 @@
                             <div class="fp_footer">
                                 <ul class="fp_meta float-left mb0">
                                     <li class="list-inline-item">
-                                        <a href="#"><img src="{{ asset('home_finance/images/property/pposter1.png') }}" alt="pposter1.png"></a>
+                                        <a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="pposter1.png"></a>
                                     </li>
                                     <li class="list-inline-item"><a href="#">{{ $blog->author ?? 'Ali Tufan' }}</a></li>
                                 </ul>
@@ -1023,7 +1023,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4">
                     <div class="for_blog feat_property">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/blog/bh1.jpg') }}" alt="bh1.jpg">
+                            <img class="img-whp" src="{{ asset('frontend/images/blog/bh1.jpg') }}" alt="bh1.jpg">
                         </div>
                         <div class="details">
                             <div class="tc_content">
@@ -1033,7 +1033,7 @@
                             <div class="fp_footer">
                                 <ul class="fp_meta float-left mb0">
                                     <li class="list-inline-item">
-                                        <a href="#"><img src="{{ asset('home_finance/images/property/pposter1.png') }}" alt="pposter1.png"></a>
+                                        <a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="pposter1.png"></a>
                                     </li>
                                     <li class="list-inline-item"><a href="#">Ali Tufan</a></li>
                                 </ul>
@@ -1045,7 +1045,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4">
                     <div class="for_blog feat_property">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/blog/bh2.jpg') }}" alt="bh2.jpg">
+                            <img class="img-whp" src="{{ asset('frontend/images/blog/bh2.jpg') }}" alt="bh2.jpg">
                         </div>
                         <div class="details">
                             <div class="tc_content">
@@ -1055,7 +1055,7 @@
                             <div class="fp_footer">
                                 <ul class="fp_meta float-left mb0">
                                     <li class="list-inline-item">
-                                        <a href="#"><img src="{{ asset('home_finance/images/property/pposter1.png') }}" alt="pposter1.png"></a>
+                                        <a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="pposter1.png"></a>
                                     </li>
                                     <li class="list-inline-item"><a href="#">Ali Tufan</a></li>
                                 </ul>
@@ -1067,7 +1067,7 @@
                 <div class="col-md-6 col-lg-4 col-xl-4">
                     <div class="for_blog feat_property">
                         <div class="thumb">
-                            <img class="img-whp" src="{{ asset('home_finance/images/blog/bh3.jpg') }}" alt="bh3.jpg">
+                            <img class="img-whp" src="{{ asset('frontend/images/blog/bh3.jpg') }}" alt="bh3.jpg">
                         </div>
                         <div class="details">
                             <div class="tc_content">
@@ -1077,7 +1077,7 @@
                             <div class="fp_footer">
                                 <ul class="fp_meta float-left mb0">
                                     <li class="list-inline-item">
-                                        <a href="#"><img src="{{ asset('home_finance/images/property/pposter1.png') }}" alt="pposter1.png"></a>
+                                        <a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="pposter1.png"></a>
                                     </li>
                                     <li class="list-inline-item"><a href="#">Ali Tufan</a></li>
                                 </ul>
@@ -1105,33 +1105,33 @@
                 @forelse($partners ?? [] as $partner)
                 <div class="col-sm-6 col-md-4 col-lg">
                     <div class="our_partner">
-                        <img class="img-fluid" src="{{ asset('home_finance/images/partners/1.png') }}" alt="{{ $partner->name ?? 'Partner' }}">
+                        <img class="img-fluid" src="{{ asset('frontend/images/partners/1.png') }}" alt="{{ $partner->name ?? 'Partner' }}">
                     </div>
                 </div>
                 @empty
                 <div class="col-sm-6 col-md-4 col-lg">
                     <div class="our_partner">
-                        <img class="img-fluid" src="{{ asset('home_finance/images/partners/1.png') }}" alt="1.png">
+                        <img class="img-fluid" src="{{ asset('frontend/images/partners/1.png') }}" alt="1.png">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg">
                     <div class="our_partner">
-                        <img class="img-fluid" src="{{ asset('home_finance/images/partners/2.png') }}" alt="2.png">
+                        <img class="img-fluid" src="{{ asset('frontend/images/partners/2.png') }}" alt="2.png">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg">
                     <div class="our_partner">
-                        <img class="img-fluid" src="{{ asset('home_finance/images/partners/3.png') }}" alt="3.png">
+                        <img class="img-fluid" src="{{ asset('frontend/images/partners/3.png') }}" alt="3.png">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg">
                     <div class="our_partner">
-                        <img class="img-fluid" src="{{ asset('home_finance/images/partners/4.png') }}" alt="4.png">
+                        <img class="img-fluid" src="{{ asset('frontend/images/partners/4.png') }}" alt="4.png">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg">
                     <div class="our_partner">
-                        <img class="img-fluid" src="{{ asset('home_finance/images/partners/5.png') }}" alt="5.png">
+                        <img class="img-fluid" src="{{ asset('frontend/images/partners/5.png') }}" alt="5.png">
                     </div>
                 </div>
                 @endforelse

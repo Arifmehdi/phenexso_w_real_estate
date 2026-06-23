@@ -7,7 +7,6 @@
 @section('description', \Illuminate\Support\Str::limit(strip_tags($news->excerpt ?? $news->description_en ?? ''), 160))
 
 @section('content')
-    <!-- Blog Single Post -->
     <section class="blog_post_container bgc-f7 pb30">
         <div class="container">
             <div class="row">
@@ -15,10 +14,10 @@
                     <div class="breadcrumb_content style2">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('news') }}">News</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('news') }}">Blog</a></li>
                             <li class="breadcrumb-item active text-thm" aria-current="page">{{ \Illuminate\Support\Str::limit($news->title, 40) }}</li>
                         </ol>
-                        <h2 class="breadcrumb_title">News & Articles</h2>
+                        <h2 class="breadcrumb_title">Blog</h2>
                     </div>
                 </div>
             </div>
@@ -32,9 +31,9 @@
                                 <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="author"></a></li>
                                 <li class="list-inline-item"><a href="#">Admin</a></li>
                                 <li class="list-inline-item"><span class="flaticon-calendar"></span></li>
-                                <li class="list-inline-item"><a href="#">{{ $news->created_at ? $news->created_at->format('F d, Y') : 'January 16, 2020' }}</a></li>
+                                <li class="list-inline-item"><a href="#">{{ $news->created_at ? $news->created_at->format('F d, Y') : '' }}</a></li>
                                 <li class="list-inline-item"><span class="flaticon-view"></span></li>
-                                <li class="list-inline-item"><a href="#"> {{ $news->view_count ?? 341 }} views</a></li>
+                                <li class="list-inline-item"><a href="#"> {{ $news->view_count ?? 0 }} views</a></li>
                                 <li class="list-inline-item"><span class="flaticon-chat"></span></li>
                                 <li class="list-inline-item"><a href="#">15</a></li>
                             </ul>
@@ -85,7 +84,55 @@
                         <div class="product_single_content mb30">
                             <div class="mbp_pagination_comments">
                                 <div class="total_review">
-                                    <h4>Comments</h4>
+                                    <h4>896 Reviews</h4>
+                                    <ul class="review_star_list mb0 pl10">
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                    </ul>
+                                    <a class="tr_outoff pl10" href="#">( 4.5 out of 5 )</a>
+                                    <a class="write_review float-right fn-xsd" href="#">Write a Review</a>
+                                </div>
+                                <div class="mbp_first media">
+                                    <img src="{{ asset('frontend/images/testimonial/1.png') }}" class="mr-3" alt="testimonial">
+                                    <div class="media-body">
+                                        <h4 class="sub_title mt-0">Diana Cooper
+                                            <span class="sspd_review">
+                                                <ul class="mb0 pl15">
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"></li>
+                                                </ul>
+                                            </span>
+                                        </h4>
+                                        <a class="sspd_postdate fz14" href="#">December 28, 2020</a>
+                                        <p class="fz14 mt10">Beautiful home, very picturesque and close to everything in jtree! A little warm for a hot weekend, but would love to come back during the cooler seasons!</p>
+                                    </div>
+                                </div>
+                                <div class="custom_hr"></div>
+                                <div class="mbp_first media">
+                                    <img src="{{ asset('frontend/images/testimonial/2.png') }}" class="mr-3" alt="testimonial">
+                                    <div class="media-body">
+                                        <h4 class="sub_title mt-0">Ali Tufan
+                                            <span class="sspd_review">
+                                                <ul class="mb0 pl15">
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li class="list-inline-item"></li>
+                                                </ul>
+                                            </span>
+                                        </h4>
+                                        <a class="sspd_postdate fz14" href="#">December 28, 2020</a>
+                                        <p class="fz14 mt10">Beautiful home, very picturesque and close to everything in jtree! A little warm for a hot weekend, but would love to come back during the cooler seasons!</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +154,10 @@
                             </ul>
                             <form class="comments_form">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="review_title" placeholder="Review Title">
+                                    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="textHelp" placeholder="Review Title">
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" id="review_message" rows="6" placeholder="Your Review"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Your Review"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-thm">Submit Review</button>
                             </form>
@@ -135,7 +182,7 @@
                                             <h4><a href="{{ route('singleNews', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
                                             <ul class="bpg_meta">
                                                 <li class="list-inline-item"><a href="#"><i class="flaticon-calendar"></i></a></li>
-                                                <li class="list-inline-item"><a href="#">{{ $post->created_at ? $post->created_at->format('F d, Y') : 'January 16, 2020' }}</a></li>
+                                                <li class="list-inline-item"><a href="#">{{ $post->created_at ? $post->created_at->format('F d, Y') : '' }}</a></li>
                                             </ul>
                                             <p>{{ \Illuminate\Support\Str::limit(strip_tags($post->excerpt ?? ''), 100) }}</p>
                                         </div>
@@ -155,7 +202,7 @@
                                 <div class="for_blog feat_property">
                                     <div class="thumb">
                                         <img class="img-whp" src="{{ asset('frontend/images/blog/1.jpg') }}" alt="blog">
-                                        <div class="tag">General</div>
+                                        <div class="tag">Construction</div>
                                     </div>
                                     <div class="details">
                                         <div class="tc_content">
@@ -180,7 +227,7 @@
                                 <div class="for_blog feat_property">
                                     <div class="thumb">
                                         <img class="img-whp" src="{{ asset('frontend/images/blog/2.jpg') }}" alt="blog">
-                                        <div class="tag">General</div>
+                                        <div class="tag">Construction</div>
                                     </div>
                                     <div class="details">
                                         <div class="tc_content">
@@ -209,7 +256,7 @@
                         <div class="blog_search_widget">
                             <form action="{{ route('news') }}" method="GET">
                                 <div class="input-group">
-                                    <input type="text" name="search" class="form-control" placeholder="Search Here" value="{{ request('search') }}" aria-label="Search" aria-describedby="button-addon2">
+                                    <input type="text" name="search" class="form-control" placeholder="Search Here" aria-label="Recipient's username" aria-describedby="button-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button" id="button-addon2"><span class="flaticon-magnifying-glass"></span></button>
                                     </div>
@@ -218,23 +265,23 @@
                         </div>
                     </div>
                     <div class="terms_condition_widget">
-                        <h4 class="title">Categories</h4>
+                        <h4 class="title">Categories Property</h4>
                         <div class="widget_list">
                             <ul class="list_details">
                                 @if(isset($newsCategories) && $newsCategories->count() > 0)
                                     @foreach($newsCategories as $cat)
                                     <li>
                                         <a href="{{ route('news', ['category' => $cat->id]) }}">
-                                            <i class="fa fa-caret-right mr10"></i>{{ $cat->name }} <span class="float-right">{{ $cat->posts_count ?? 0 }} posts</span>
+                                            <i class="fa fa-caret-right mr10"></i>{{ $cat->name }} <span class="float-right">{{ $cat->posts_count ?? 0 }} properties</span>
                                         </a>
                                     </li>
                                     @endforeach
                                 @else
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>General <span class="float-right">6 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Real Estate <span class="float-right">12 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Construction <span class="float-right">8 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Market Trends <span class="float-right">26 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Investment <span class="float-right">89 posts</span></a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Apartment <span class="float-right">6 properties</span></a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Condo <span class="float-right">12 properties</span></a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Family House <span class="float-right">8 properties</span></a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Modern Villa <span class="float-right">26 properties</span></a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Town House <span class="float-right">89 properties</span></a></li>
                                 @endif
                             </ul>
                         </div>
@@ -244,10 +291,12 @@
                         @if(isset($featuredProperties) && $featuredProperties->count() > 0)
                             @foreach($featuredProperties as $property)
                             <div class="media">
-                                <img class="align-self-start mr-3" src="{{ asset('frontend/images/blog/fls' . (($loop->index % 3) + 1) . '.jpg') }}" alt="{{ $property->name ?? 'Property' }}">
+                                <a href="{{ route('productDetails', ['slug' => $property->slug]) }}">
+                                    <img class="align-self-start mr-3" src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $property->fi()]) }}" alt="{{ $property->name ?? 'Property' }}">
+                                </a>
                                 <div class="media-body">
                                     <h5 class="mt-0 post_title">{{ $property->name ?? 'Property' }}</h5>
-                                    <a href="#">${{ number_format($property->final_price ?? 13000) }}/<small>/mo</small></a>
+                                    <a href="{{ route('productDetails', ['slug' => $property->slug]) }}">${{ number_format($property->final_price ?? 13000) }}/<small>/mo</small></a>
                                     <ul class="mb0">
                                         <li class="list-inline-item">Beds: {{ $property->bedrooms ?? 4 }}</li>
                                         <li class="list-inline-item">Baths: {{ $property->bathrooms ?? 2 }}</li>
@@ -302,7 +351,7 @@
                             <li class="list-inline-item"><a href="#">Real Estate</a></li>
                             <li class="list-inline-item"><a href="#">Estate</a></li>
                             <li class="list-inline-item"><a href="#">Luxury</a></li>
-                            <li class="list-inline-item"><a href="#">Investment</a></li>
+                            <li class="list-inline-item"><a href="#">Real</a></li>
                         </ul>
                     </div>
                 </div>

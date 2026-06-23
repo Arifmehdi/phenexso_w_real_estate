@@ -9,11 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="CreativeLayers" content="ATFN">
     <title>@yield('title', "Home & Finance Int'l Ltd.")</title>
-    <link href="{{ asset('home_finance/images/favicon.ico') }}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-    <link href="{{ asset('home_finance/images/favicon.ico') }}" sizes="128x128" rel="shortcut icon" />
-    <link rel="stylesheet" href="{{ asset('home_finance/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('home_finance/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('home_finance/css/responsive.css') }}">
+    <link href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+    <link href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}" sizes="128x128" rel="shortcut icon" />
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -29,25 +29,25 @@
         </main>
         @include('website.layouts.home_finance_footer')
     </div>
-    <script type="text/javascript" src="{{ asset('home_finance/js/jquery-3.3.1.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/jquery-migrate-3.0.0.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/jquery.mmenu.all.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/ace-responsive-menu.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/bootstrap-select.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/isotop.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/snackbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/simplebar.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/parallax.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/scrollto.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/jquery-scrolltofixed-min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/jquery.counterup.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/wow.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/slider.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/pricing-slider.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/timepicker.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('home_finance/js/script.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery-3.3.1.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery-migrate-3.0.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery.mmenu.all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/ace-responsive-menu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/bootstrap-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/isotop.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/snackbar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/simplebar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/parallax.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/scrollto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery-scrolltofixed-min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery.counterup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/wow.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/slider.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/pricing-slider.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/timepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/script.js') }}"></script>
     @stack('js')
 </body>
 </html>

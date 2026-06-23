@@ -1,251 +1,137 @@
-@extends('website.layouts.mncofee')
+@extends('website.layouts.home_finance')
 
-@section('title', 'Contact Us - '. ($ws->name ?? env('APP_NAME')))
+@section('title', "Contact Us - Home & Finance Int'l Ltd.")
 
-@section('meta')
-<meta name="description" content="Get in touch with {{ $ws->name ?? env('APP_NAME') }}. We are here to help you with your inquiries.">
-<meta name="keywords" content="Contact, Coffee, Help, Inquiries, MNCOfee">
-@endsection
+@section('keywords', 'contact, real estate, property, home, finance, address, phone, email')
 
-@push('css')
-<style>
-    .ad-menu-banner {
-        background-image: url("{{ asset('mncofee/assets/img/aida-images/menu-banner.png') }}") !important;
-        background-size: cover;
-        background-position: center;
-    }
-</style>
-@endpush
+@section('description', 'Get in touch with Home & Finance Intl Ltd. Send us an inquiry and we will get back to you as soon as possible.')
 
 @section('content')
-<!--------------- 
-    Banner 
----------------->
-<section>
-    <div class="ad-menu-banner position-relative">
-        <div class="ad-menu-banner-overlay">
-            <div>
-                <a href="{{ route('home') }}">Home /</a>
-                <a class="selected-page" href="{{ route('contact') }}"> Contact</a>
+    <!-- Inner Page Breadcrumb -->
+    <section class="inner_page_breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="breadcrumb_content">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                        </ol>
+                        <h4 class="breadcrumb_title">Contact Us</h4>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Our Office -->
-{{--<section data-aos="fade-up">
-    <div class=" contact-page-office-container">
-        <div class="contact-page-single-office">
-            <div class="overflow-hidden">
-                <a href="#">
-                    <img src="{{ asset('mncofee/assets/img/aida-images/contact-page-outlet-image1.png') }}" class="contact-page-outlet" alt="">
-                </a>
-            </div>
-            <div class="d-flex gap-2 align-items-center mt-3">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    style="width: 24px; height: 24px;"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-                </svg>
-                <div>
-                    <h5>Main Office</h5>
-                </div>
-            </div>
-            <div>
-                <p>Location</p>
-                <span>{{ $ws->address ?? '27, Division Street, New York' }}</span>
-            </div>
-            <div>
-                <p>Phone</p>
-                <a href="tel:{{ $ws->phone ?? '+1 800 123 456 789' }}" class="ms-3">{{ $ws->phone ?? '+1 800 123 456 789' }}</a>
-            </div>
-            <div>
-                <p>Email</p>
-                <span>{{ $ws->email ?? 'info@example.com' }}</span>
-            </div>
-        </div>
-        <div class="contact-page-single-office">
-            <div class="overflow-hidden">
-                <a href="#">
-                    <img src="{{ asset('mncofee/assets/img/aida-images/contact-page-outlet-image2.png') }}" class="contact-page-outlet" alt="">
-                </a>
-            </div>
-            <div class="d-flex gap-2 align-items-center mt-3">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    style="width: 24px; height: 24px;"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-                </svg>
-                <div>
-                    <h5>Secondary Outlet</h5>
-                </div>
-            </div>
-            <div>
-                <p>Location</p>
-                <span>{{ $ws->contact_address ?? 'Available upon request' }}</span>
-            </div>
-            <div>
-                <p>Phone</p>
-                <a href="tel:{{ $ws->contact_mobile ?? '+1 800 123 456 789' }}" class="ms-3">{{ $ws->contact_mobile ?? '+1 800 123 456 789' }}</a>
-            </div>
-            <div>
-                <p>Email</p>
-                <span>{{ $ws->contact_email ?? 'support@example.com' }}</span>
-            </div>
-        </div>
-        <div class="contact-page-single-office">
-            <div class="overflow-hidden">
-                <a href="#">
-                    <img src="{{ asset('mncofee/assets/img/aida-images/contact-page-outlet-image3.png') }}" class="contact-page-outlet" alt="">
-                </a>
-            </div>
-            <div class="d-flex gap-2 align-items-center mt-3">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    style="width: 24px; height: 24px;"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-                </svg>
-                <div>
-                    <h5>Customer Support</h5>
-                </div>
-            </div>
-            <div>
-                <p>Availability</p>
-                <span>24/7 Online Support</span>
-            </div>
-            <div>
-                <p>Phone</p>
-                <a href="tel:{{ $ws->phone ?? '+1 800 123 456 789' }}" class="ms-3">{{ $ws->phone ?? '+1 800 123 456 789' }}</a>
-            </div>
-            <div>
-                <p>Email</p>
-                <span>{{ $ws->email ?? 'info@example.com' }}</span>
-            </div>
-        </div>
-    </div>
-</section>--}}
-
-<!-- Contact Form -->
-<section data-aos="fade-up">
-    <div class="contact-page-form-container ">
-        <div class="contact-page-form">
-            <h4>Get In Touch</h4>
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            <p>
-                Feel free to contact us for any inquiries or support.
-            </p>
-            <form action="{{ route('contact.store') }}" method="POST">
-                @csrf
-                <div class="row ad-reservation-form contact-page-single-form">
-                    <div class="col-12 col-sm-6 position-relative ps-3">
-                        <i class="fa-regular fa-user"></i>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            required
-                        >
-                    </div>
-                    <div class="col-12 col-sm-6 position-relative ps-3 ps-sm-0 pe-sm-3">
-                        <i class="fa-regular fa-envelope"></i>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email Address"
-                            required
-                        >
+    <!-- Our Contact -->
+    <section class="our-contact pb0 bgc-f7">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-xl-8">
+                    <div class="form_grid">
+                        <h4 class="mb5">Send Us An Email</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida quis libero eleifend ornare. Maecenas mattis enim at arcu feugiat, sit amet blandit nisl iaculis.</p>
+                        @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                        <form class="contact_form" id="contact_form" name="contact_form" action="{{ route('contact.store') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input id="form_name" name="name" class="form-control" required="required" type="text" placeholder="Name" value="{{ old('name') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input id="form_email" name="email" class="form-control" required="required" type="email" placeholder="Email" value="{{ old('email') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input id="form_phone" name="phone" class="form-control" required="required" type="text" placeholder="Phone" value="{{ old('phone') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input id="form_subject" name="subject" class="form-control" required="required" type="text" placeholder="Subject" value="{{ old('subject') }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea id="form_message" name="message" class="form-control required" rows="8" required="required" placeholder="Your Message">{{ old('message') }}</textarea>
+                                    </div>
+                                    <div class="form-group mb0">
+                                        <button type="submit" class="btn btn-lg btn-thm">Send Message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="row ad-reservation-form contact-page-single-form contact-page-phone-container">
-                    <div class="col-12 col-sm-6 position-relative ps-3">
-                        <i class="fa-solid fa-phone"></i>
-                        <input
-                            type="text"
-                            name="phone"
-                            placeholder="Phone"
-                            required
-                        >
-                    </div>
-                    <div class="col-12 col-sm-6 position-relative ps-3 ps-sm-0 pe-sm-3">
-                        <i class="fa-solid fa-user-large"></i>
-                        <input
-                            type="text"
-                            name="subject"
-                            placeholder="Subject"
-                            required
-                        >
-                    </div>
-                </div>
-                <div class="ad-reservation-form contact-page-single-form">
-                    <div class="col-12 position-relative ps-2 contact-page-form-edit">
-                        <div>
-                            <i class="fa-solid fa-pen"></i>
-                            <span class="ps-3">How can we help you</span>
+                <div class="col-lg-5 col-xl-4">
+                    <div class="contact_localtion">
+                        <h4>Contact Us</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida quis libero eleifend ornare. habitasse platea dictumst.</p>
+                        <div class="content_list">
+                            <h5>Address</h5>
+                            <p>{{ $ws->contact_address}}<br>WI 53711</p>
                         </div>
-                        <textarea
-                            name="message"
-                            rows="4"
-                            style="width: 100%; border: 1px solid #ccc; padding: 10px; margin-top: 10px;"
-                            required
-                        ></textarea>
+                        <div class="content_list">
+                            <h5>Phone</h5>
+                            <p>{{ $ws->contact_mobile }}</p>
+                        </div>
+                        <div class="content_list">
+                            <h5>Mail</h5>
+                            <p>{{ $ws->contact_email }}</p>
+                        </div>
+                        <div class="content_list">
+                            <h5>Skype</h5>
+                            <p>findhouse.com</p>
+                        </div>
+                        <h5>Follow Us</h5>
+                        <ul class="contact_form_social_area">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
                     </div>
                 </div>
-                <button type="submit">Send Message</button>
-            </form>
+            </div>
         </div>
-        <div class="contact-page-form-right">
-            <div class="contact-page-right-single-container">
-                <i class="fa-solid fa-phone-volume"></i>
-                <div>
-                    <h5>Call Now</h5>
-                    <a href="tel:{{ $ws->contact_mobile ?? '+554551556695' }}">
-                        <span>{{ $ws->contact_mobile ?? '+554551556695' }}</span>
-                    </a>
-                </div>
-            </div>
-            <div class="contact-page-right-single-container">
-                <i class="fa-solid fa-envelope-open-text"></i>
-                <div>
-                    <h5>Message Now</h5>
-                    <span>{{ $ws->contact_email ?? 'info@example.com' }}</span>
-                </div>
-            </div>
-            <div class="contact-page-right-single-container">
-                <i class="fa-solid fa-location-dot"></i>
-                <div>
-                    <h5>Address Now</h5>
-                    <span>{{ $ws->contact_address ?? 'Uttara, Dhaka' }}</span>
+        <div class="container-fluid p0 mt50">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="h600" id="map-canvas"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="contact-page-map">
-        <iframe
-            src="{{ $ws->iframe_map ?? 'https://maps.google.com/maps?q=dhaka&t=&z=13&ie=UTF8&iwloc=&output=embed' }}"
-            frameborder="0"
-            scrolling="no"
-            style="width: 100%; height: 450px;"
-        ></iframe>
-    </div>
-</section>
+    </section>
+
+    <!-- Start Partners -->
+    <section class="start-partners bgc-thm pt50 pb50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="start_partner tac-smd">
+                        <h2>Become a Real Estate Agent</h2>
+                        <p>We only work with the best companies around the globe</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="parner_reg_btn text-right tac-smd">
+                        <a class="btn btn-thm2" href="#">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
+
+@push('js')
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM&callback=initMap" type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('frontend/js/googlemaps1.js') }}"></script>
+@endpush

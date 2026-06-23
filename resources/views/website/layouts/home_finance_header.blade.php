@@ -2,7 +2,7 @@
     <div class="container-fluid p0">
         <nav>
             <div class="menu-toggle">
-                <img class="nav_logo_img img-fluid" src="{{ asset('home_finance/images/header-logo.png') }}" alt="header-logo.png">
+                <img class="nav_logo_img img-fluid" src="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->logo_alt()]) }}" alt="{{ $ws->name }}">
                 <button type="button" id="menu-btn">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -10,8 +10,8 @@
                 </button>
             </div>
             <a href="{{ url('/') }}" class="navbar_brand float-left dn-smd">
-                <img class="logo1 img-fluid" src="{{ asset('home_finance/images/logo.png') }}" alt="header-logo.png">
-                <img class="logo2 img-fluid" src="{{ asset('home_finance/images/logo.png') }}" alt="header-logo2.png">
+                <img class="logo1 img-fluid" src="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->logo_alt()]) }}" alt="{{ $ws->name }}">
+                <img class="logo2 img-fluid" src="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->logo_alt()]) }}" alt="{{ $ws->name }}">
             </a>
             <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
                 <li>
@@ -21,12 +21,8 @@
                     <a href="{{ url('/properties') }}"><span class="title">Property</span></a>
                 </li>
                 <li>
-                    <a href="#"><span class="title">Article</span></a>
-                    <ul>
-                        <li><a href="{{ route('news') }}">Blog List 1</a></li>
-                        <li><a href="{{ route('news') }}">Blog List 2</a></li>
-                        <li><a href="{{ route('news') }}">Single Post</a></li>
-                    </ul>
+                    <a href="{{ route('news') }}"><span class="title">Article</span></a>
+
                 </li>
                 <li class="last">
                     <a href="{{ route('contact') }}"><span class="title">Contact</span></a>
@@ -36,12 +32,12 @@
                         <span class="dn-lg text-thm3">Login/Register</span>
                     </a>
                 </li>
-                <li class="list-inline-item add_listing home2">
+                {{--<li class="list-inline-item add_listing home2">
                     <a href="{{ url('/add-listing') }}">
                         <span class="flaticon-plus"></span>
                         <span class="dn-lg"> Create Listing</span>
                     </a>
-                </li>
+                </li>--}}
             </ul>
         </nav>
     </div>
@@ -72,7 +68,7 @@
                     <div class="row mt25 tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="col-lg-6 col-xl-6">
                             <div class="login_thumb">
-                                <img class="img-fluid w100" src="{{ asset('home_finance/images/resource/login.jpg') }}" alt="login.jpg">
+                                <img class="img-fluid w100" src="{{ asset('frontend/images/resource/login.jpg') }}" alt="login.jpg">
                             </div>
                         </div>
                         <div class="col-lg-6 col-xl-6">
@@ -121,7 +117,7 @@
                     <div class="row mt25 tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-lg-6 col-xl-6">
                             <div class="regstr_thumb">
-                                <img class="img-fluid w100" src="{{ asset('home_finance/images/resource/regstr.jpg') }}" alt="regstr.jpg">
+                                <img class="img-fluid w100" src="{{ asset('frontend/images/resource/regstr.jpg') }}" alt="regstr.jpg">
                             </div>
                         </div>
                         <div class="col-lg-6 col-xl-6">
@@ -196,10 +192,10 @@
         <div class="header stylehome1">
             <div class="d-flex justify-content-between">
                 <a class="mobile-menu-trigger" href="#menu">
-                    <img src="{{ asset('home_finance/images/dark-nav-icon.svg') }}" alt="">
+                    <img src="{{ asset('frontend/images/dark-nav-icon.svg') }}" alt="">
                 </a>
-                <a class="nav_logo_img" href="{{ url('/') }}">
-                    <img class="img-fluid mt20" src="{{ asset('home_finance/images/header-logo2.png') }}" alt="header-logo2.png">
+                <a class="nav_logo_img" href="{{ route('home') }}">
+                    <img class="img-fluid mt20" src="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->logo_alt()]) }}" alt="{{ $ws->name }}">
                 </a>
                 <a class="mobile-menu-reg-link" href="{{ route('register') }}">
                     <span class="flaticon-user"></span>

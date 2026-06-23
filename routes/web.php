@@ -24,10 +24,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\BlogSingleController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Mail;
 
 // Route::get('/',[AuthController::class,'index'])->name('login');
 
@@ -116,7 +118,6 @@ Route::get('hospital-details/{id}',[FrontendController::class,'HospitalDetails']
 
 // Home & Finance  website
 Route::get('/',[FrontendController::class, 'index'])->name('home');
-Route::get('/realestate',[FrontendController::class, 'realestate'])->name('realestate.home');
 Route::get('/md-message',[FrontendController::class,'mdMessage'])->name('mdMessage');
 Route::get('/testimonial',[FrontendController::class,'testimonial'])->name('testimonial');
 Route::get('/about',[FrontendController::class,'about'])->name('about');
@@ -128,6 +129,7 @@ Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('wishlist
 Route::post('/wishlist/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
+Route::get('/properties',[FrontendController::class,'properties'])->name('properties');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/service',[FrontendController::class,'service'])->name('service');
 // Route::get('/product',[HomeController::class,'product'])->name('product');
@@ -230,6 +232,11 @@ Route::get('/news/{id}', [
     'uses' => 'App\Http\Controllers\Frontend\FrontendController@singleNews',
     'as' => 'singleNews'
 ]);
+
+Route::get('/news/{slug}', [
+    'uses' => 'App\Http\Controllers\Frontend\BlogSingleController@show',
+    'as' => 'singleNewsBySlug'
+])->where('slug', '[a-zA-Z0-9-]+');
 
 Route::get('/support-policy', [
     'uses' => 'App\Http\Controllers\Frontend\FrontendController@supportpolicy',
