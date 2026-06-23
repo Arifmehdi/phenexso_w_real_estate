@@ -114,8 +114,9 @@ Route::get('page/{slug?}',[FrontendController::class, 'page'])->name('page');
 Route::get('/website/compliance',[FrontendController::class, 'websiteCompliance'])->name('websiteCompliance');
 Route::get('hospital-details/{id}',[FrontendController::class,'HospitalDetails'])->name('hospital-details');
 
-// HUBLI  website 
+// Home & Finance  website
 Route::get('/',[FrontendController::class, 'index'])->name('home');
+Route::get('/realestate',[FrontendController::class, 'realestate'])->name('realestate.home');
 Route::get('/md-message',[FrontendController::class,'mdMessage'])->name('mdMessage');
 Route::get('/testimonial',[FrontendController::class,'testimonial'])->name('testimonial');
 Route::get('/about',[FrontendController::class,'about'])->name('about');

@@ -116,8 +116,21 @@ class FrontendController extends Controller
 
         $data['content'] = \App\Models\PageContent::where('page_slug', 'home')->first();
 
-        return view('website.index', $data);  
-        }
+        return view('website.index', $data);
+    }
+
+    public function realestate()
+    {
+        $data['featuredProperties'] = collect();
+        $data['cities'] = collect();
+        $data['bestProperties'] = collect();
+        $data['whyChooseUs'] = collect();
+        $data['testimonials'] = Testimonial::whereActive(true)->latest()->limit(5)->get();
+        $data['blogs'] = BlogPost::whereActive(true)->latest()->limit(3)->get();
+        $data['partners'] = collect();
+
+        return view('website.home_index', $data);
+    }
 
     // For lazy loading products via AJAX
     public function getProductsByCategory($categoryId)
