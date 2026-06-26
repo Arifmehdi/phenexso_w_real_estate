@@ -48,9 +48,16 @@ class FrontendController extends Controller
 
     public function index()
     {
-        $data['featuredProperties'] = collect();
+        $data['featuredProperties'] = Product::whereActive(true)
+            ->where('feature', true)
+            ->latest()
+            ->limit(8)
+            ->get();
         $data['cities'] = collect();
-        $data['bestProperties'] = collect();
+        $data['bestProperties'] = Product::whereActive(true)
+            ->latest()
+            ->limit(6)
+            ->get();
         $data['whyChooseUs'] = collect();
         $data['testimonials'] = Testimonial::whereActive(true)->latest()->limit(5)->get();
         $data['blogs'] = BlogPost::whereActive(true)->latest()->limit(3)->get();

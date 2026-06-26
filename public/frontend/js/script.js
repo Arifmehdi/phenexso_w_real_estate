@@ -1,15 +1,25 @@
 (function($) {
-    
+
     "use strict";
+
+    /* ----- Owl Carousel safe-loop patch ----- */
+    /* Disables loop when there are too few items to clone, preventing a crash
+       (TypeError: can't access property "clone") that blocks page load on mobile */
+    if ($.fn.owlCarousel) {
+        var _originalOwl = $.fn.owlCarousel;
+        $.fn.owlCarousel = function(options) {
+            if (options && options.loop) {
+                if (this.children().length < 3) {
+                    options = $.extend({}, options, { loop: false });
+                }
+            }
+            return _originalOwl.apply(this, arguments);
+        };
+    }
 
     /* ----- Preloader ----- */
     function preloaderLoad() {
-        if($('.preloader').length){
-            $('.preloader').delay(200).fadeOut(300);
-        }
-        $(".preloader_disabler").on('click', function() {
-            $("#preloader").hide();
-        });
+        // Preloader is now handled by #hf-preloader in the layout (CSS + native JS)
     }
 
     /* ----- Navbar Scroll To Fixed ----- */
@@ -528,34 +538,32 @@
     if($('.feature_property_home3_slider').length){
         $('.feature_property_home3_slider').owlCarousel({
             loop:true,
-            margin:30,
+            margin:25,
             dots:false,
             nav:true,
             rtl:false,
-            autoplayHoverPause:false,
-            autoplay: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
             singleItem: true,
-            smartSpeed: 1200,
+            smartSpeed: 800,
+            fluidSpeed: 800,
             navText: [
               '<i class="flaticon-left-arrow"></i>',
               '<i class="flaticon-right-arrow"></i>'
             ],
             responsive: {
                 0: {
-                    items: 1,
-                    center: false
+                    items: 1
                 },
                 480:{
-                    items:1,
-                    center: false
+                    items: 1
                 },
                 520:{
-                    items:2,
-                    center: false
+                    items: 2
                 },
                 600: {
-                    items: 2,
-                    center: false
+                    items: 2
                 },
                 768: {
                     items: 2
@@ -925,11 +933,11 @@
                 1400: {
                     items: 1
                 }
-            }
-        })
-    }
+             }
+         })
+     }
 
-    /* ----- Scroll To top ----- */
+     /* ----- Scroll To top ----- */
     function scrollToTop() {
         $(window).scroll(function(){
             if ($(this).scrollTop() > 600) {
@@ -1001,7 +1009,6 @@
         // add your functions
         navbarScrollfixed();
         scrollToTop();
-        wowAnimation();
         mobileNavToggle();
 
         
@@ -1042,9 +1049,10 @@
     // window on Load function
     $(window).on('load', function() {
         // add your functions
-        counterNumber();
+        try { counterNumber(); } catch(e) {}
         preloaderLoad();
-        
+        try { initializeSliders(); } catch(e) {}
+        try { wowAnimation(); } catch(e) {}
     });
     // window on Scroll function
     $(window).on('scroll', function() {

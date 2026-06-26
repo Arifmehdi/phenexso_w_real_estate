@@ -197,7 +197,7 @@
                 <a class="nav_logo_img" href="{{ route('home') }}">
                     <img class="img-fluid mt20" src="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->logo_alt()]) }}" alt="{{ $ws->name }}">
                 </a>
-                <a class="mobile-menu-reg-link" href="{{ route('register') }}">
+                <a class="mobile-menu-reg-link" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
                     <span class="flaticon-user"></span>
                 </a>
             </div>
@@ -205,48 +205,11 @@
     </div>
     <nav id="menu" class="stylehome1">
         <ul>
-            <li><span>Home</span>
-                <ul>
-                    <li><a href="{{ url('/') }}">Home 1</a></li>
-                </ul>
-            </li>
-            <li><span>Listing</span>
-                <ul>
-                    <li><a href="#">Grid v1</a></li>
-                </ul>
-            </li>
-            <li><span>Property</span>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">My Properties</a></li>
-                    <li><a href="#">Add New Property</a></li>
-                </ul>
-            </li>
-            <li><span>Blog</span>
-                <ul>
-                    <li><a href="#">Blog List 1</a></li>
-                    <li><a href="#">Blog List 2</a></li>
-                    <li><a href="#">Single Post</a></li>
-                </ul>
-            </li>
-            <li><span>Pages</span>
-                <ul>
-                    <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Faq</a></li>
-                    <li><a href="{{ route('login') }}">LogIn</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
-                    <li><a href="{{ route('terms') }}">Terms and Conditions</a></li>
-                </ul>
-            </li>
+            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ url('/properties') }}">Property</a></li>
+            <li><a href="{{ route('news') }}">Article</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
-            <li><a href="{{ route('login') }}"><span class="flaticon-user"></span> Login</a></li>
-            <li><a href="{{ route('register') }}"><span class="flaticon-edit"></span> Register</a></li>
-            <li class="cl_btn">
-                <a class="btn btn-block btn-lg btn-thm circle" href="#">
-                    <span class="flaticon-plus"></span> Create Listing
-                </a>
-            </li>
+            <li><a href="{{ route('login') }}"><span class="flaticon-user"></span> Login / Register</a></li>
         </ul>
     </nav>
 </div>

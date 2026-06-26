@@ -105,7 +105,15 @@
         <div class="container-fluid p0 mt50">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="h600" id="map-canvas"></div>
+                    <iframe
+                        src="{{ $ws->iframe_map }}"
+                        width="100%"
+                        height="600"
+                        style="border:0; display:block;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
                 </div>
             </div>
         </div>
