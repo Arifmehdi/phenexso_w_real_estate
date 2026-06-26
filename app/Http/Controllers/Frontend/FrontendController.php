@@ -266,7 +266,20 @@ class FrontendController extends Controller
             ->limit(5)
             ->get();
 
-        return view('website.properties', compact('properties', 'featuredProperties'));
+        // Toggle: true = show dynamic data from database, false = show the static design.
+        $dynamic = false;
+
+        return view('website.properties', compact('properties', 'featuredProperties', 'dynamic'));
+    }
+
+    public function projectDetails($id = null)
+    {
+        $property = $id ? Product::whereActive(true)->find($id) : null;
+
+        // Toggle: true = show dynamic data from database, false = show the static design.
+        $dynamic = false;
+
+        return view('website.project_details', compact('property', 'dynamic'));
     }
 
     public function service()

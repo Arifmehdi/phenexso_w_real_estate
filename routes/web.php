@@ -130,6 +130,7 @@ Route::post('/wishlist/remove', [WishlistController::class, 'remove'])->name('wi
 
 Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
 Route::get('/properties',[FrontendController::class,'properties'])->name('properties');
+Route::get('/project-details/{id?}',[FrontendController::class,'projectDetails'])->name('project.details');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/service',[FrontendController::class,'service'])->name('service');
 // Route::get('/product',[HomeController::class,'product'])->name('product');

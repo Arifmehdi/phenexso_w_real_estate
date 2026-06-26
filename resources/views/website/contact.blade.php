@@ -1,145 +1,114 @@
-@extends('website.layouts.home_finance')
+@extends('website.layouts.finance_design')
 
-@section('title', "Contact Us - Home & Finance Int'l Ltd.")
+@section('title', "Contact — " . ($ws->name ?? "Land & Finance"))
 
-@section('keywords', 'contact, real estate, property, home, finance, address, phone, email')
+@section('keywords', 'contact, real estate, property, land, finance, address, phone, email')
 
-@section('description', 'Get in touch with Home & Finance Intl Ltd. Send us an inquiry and we will get back to you as soon as possible.')
+@section('description', 'Get in touch with us. Send us an inquiry and we will get back to you as soon as possible.')
+
+@push('css')
+<style>
+    .lf-alert {
+        max-width: 1200px;
+        margin: 25px auto -20px;
+        padding: 14px 20px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .lf-alert.success { background: #e7f7ec; color: #1e7e44; border: 1px solid #b6e3c4; }
+    .lf-alert.error   { background: #fdecea; color: #b3261e; border: 1px solid #f5c2c0; }
+    .lf-alert ul { margin: 6px 0 0; padding-left: 18px; font-weight: 500; }
+</style>
+@endpush
 
 @section('content')
-    <!-- Inner Page Breadcrumb -->
-    <section class="inner_page_breadcrumb">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="breadcrumb_content">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
-                        </ol>
-                        <h4 class="breadcrumb_title">Contact Us</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <h1>Contact</h1>
+        <div class="breadcrumb"><a href="{{ url('/') }}">Home</a> &raquo; Contact</div>
     </section>
 
-    <!-- Our Contact -->
-    <section class="our-contact pb0 bgc-f7">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-xl-8">
-                    <div class="form_grid">
-                        <h4 class="mb5">Send Us An Email</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida quis libero eleifend ornare. Maecenas mattis enim at arcu feugiat, sit amet blandit nisl iaculis.</p>
-                        @if(session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-                        <form class="contact_form" id="contact_form" name="contact_form" action="{{ route('contact.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="form_name" name="name" class="form-control" required="required" type="text" placeholder="Name" value="{{ old('name') }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="form_email" name="email" class="form-control" required="required" type="email" placeholder="Email" value="{{ old('email') }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="form_phone" name="phone" class="form-control" required="required" type="text" placeholder="Phone" value="{{ old('phone') }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input id="form_subject" name="subject" class="form-control" required="required" type="text" placeholder="Subject" value="{{ old('subject') }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <textarea id="form_message" name="message" class="form-control required" rows="8" required="required" placeholder="Your Message">{{ old('message') }}</textarea>
-                                    </div>
-                                    <div class="form-group mb0">
-                                        <button type="submit" class="btn btn-lg btn-thm">Send Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    @if(session('success'))
+        <div class="lf-alert success">{{ session('success') }}</div>
+    @endif
+    @if($errors->any())
+        <div class="lf-alert error">
+            Please check the form:
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+
+        <div class="contact-info">
+            <div class="contact-subtitle">Get In Touch</div>
+            <h2>Contact With Us</h2>
+            <p>Have a question about buying, selling, or managing your property? Reach out to our team and we will get back to you as soon as possible.</p>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-text">
+                    <h4>Our Location</h4>
+                    <p>{{ $ws->contact_address ?? 'Dhaka, Bangladesh' }}</p>
                 </div>
-                <div class="col-lg-5 col-xl-4">
-                    <div class="contact_localtion">
-                        <h4>Contact Us</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida quis libero eleifend ornare. habitasse platea dictumst.</p>
-                        <div class="content_list">
-                            <h5>Address</h5>
-                            <p>{{ $ws->contact_address}}<br>WI 53711</p>
-                        </div>
-                        <div class="content_list">
-                            <h5>Phone</h5>
-                            <p>{{ $ws->contact_mobile }}</p>
-                        </div>
-                        <div class="content_list">
-                            <h5>Mail</h5>
-                            <p>{{ $ws->contact_email }}</p>
-                        </div>
-                        <div class="content_list">
-                            <h5>Skype</h5>
-                            <p>findhouse.com</p>
-                        </div>
-                        <h5>Follow Us</h5>
-                        <ul class="contact_form_social_area">
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
-                    </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="info-text">
+                    <h4>Email Us</h4>
+                    <p>{{ $ws->contact_email ?? 'Info@landfinance.com' }}</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div class="info-text">
+                    <h4>Call Us</h4>
+                    <p>{{ $ws->contact_mobile ?? '01717XXXXXXX' }}</p>
                 </div>
             </div>
         </div>
-        <div class="container-fluid p0 mt50">
-            <div class="row">
-                <div class="col-lg-12">
-                    <iframe
-                        src="{{ $ws->iframe_map }}"
-                        width="100%"
-                        height="600"
-                        style="border:0; display:block;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="strict-origin-when-cross-origin">
-                    </iframe>
+
+        <div class="membership-form">
+            <form id="contact-form" action="{{ route('contact.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="contact-name">Name *</label>
+                    <input type="text" id="contact-name" name="name" placeholder="Your name" value="{{ old('name') }}" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="contact-email">Email Address *</label>
+                    <input type="email" id="contact-email" name="email" placeholder="Your email" value="{{ old('email') }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-phone">Phone Number</label>
+                    <input type="tel" id="contact-phone" name="phone" placeholder="Your phone" value="{{ old('phone') }}">
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="message" placeholder="Write your message..." required>{{ old('message') }}</textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
         </div>
+
     </section>
 
-    <!-- Start Partners -->
-    <section class="start-partners bgc-thm pt50 pb50">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="start_partner tac-smd">
-                        <h2>Become a Real Estate Agent</h2>
-                        <p>We only work with the best companies around the globe</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="parner_reg_btn text-right tac-smd">
-                        <a class="btn btn-thm2" href="#">Register Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Map -->
+    <section class="contact-map">
+        <iframe
+            src="{{ $ws->iframe_map ?? 'https://www.google.com/maps?q=Dhaka,Bangladesh&output=embed' }}"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="{{ $ws->contact_address ?? 'Dhaka, Bangladesh' }}"></iframe>
     </section>
+
 @endsection
-
-@push('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM&callback=initMap" type="text/javascript"></script>
-<script type="text/javascript" src="{{ asset('frontend/js/googlemaps1.js') }}"></script>
-@endpush

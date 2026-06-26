@@ -124,7 +124,7 @@
                                 <img src="{{ $p['logo'] }}" alt="{{ $p['company'] }}">
                                 <div class="flex-company">{{ $p['company'] }}</div>
                             </div>
-                            <a href="{{ url('/properties') }}" class="flex-btn">VIEW DETAILS</a>
+                            <a href="{{ route('project.details') }}" class="flex-btn">VIEW DETAILS</a>
                         </div>
                     </div>
                     @endforeach

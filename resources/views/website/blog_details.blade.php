@@ -1,312 +1,222 @@
-@extends('website.layouts.home_finance')
+@extends('website.layouts.finance_design')
 
-@section('title', $news->title . " - Home & Finance Int'l Ltd.")
+@section('title', $news->title . " — " . ($ws->name ?? "Land & Finance"))
 
 @section('keywords', $news->category->name ?? 'news, blog, real estate, property')
 
 @section('description', \Illuminate\Support\Str::limit(strip_tags($news->excerpt ?? $news->description_en ?? ''), 160))
 
+@push('css')
+<style>
+    /* Article meta */
+    .article-cat {
+        display: inline-block;
+        background: var(--primary);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 6px 14px;
+        border-radius: 30px;
+        margin-bottom: 16px;
+    }
+    .article-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 34px;
+        line-height: 1.3;
+        color: var(--dark);
+        margin-bottom: 16px;
+    }
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+        color: var(--text-light);
+        font-size: 14px;
+        margin-bottom: 26px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid var(--border);
+    }
+    .article-meta span i { color: var(--primary); margin-right: 7px; }
+    .article-hero {
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        margin-bottom: 28px;
+    }
+    .article-hero img { width: 100%; display: block; }
+    .article-excerpt { font-size: 17px; font-weight: 600; color: var(--dark); line-height: 1.8; margin-bottom: 22px; }
+    .article-body { color: var(--text); font-size: 16px; line-height: 1.9; }
+    .article-body p { margin-bottom: 18px; }
+    .article-body h2, .article-body h3 { font-family: 'Playfair Display', serif; color: var(--dark); margin: 26px 0 14px; }
+    .article-body img { max-width: 100%; border-radius: 12px; margin: 18px 0; }
+    .article-body ul, .article-body ol { margin: 0 0 18px 22px; }
+
+    .article-share { display: flex; align-items: center; gap: 10px; margin: 32px 0; padding-top: 22px; border-top: 1px solid var(--border); }
+    .article-share span { font-weight: 700; color: var(--dark); margin-right: 4px; }
+    .article-share a {
+        width: 40px; height: 40px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: #f1f3f7; color: #333; transition: 0.3s;
+    }
+    .article-share a:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+
+    /* Related posts */
+    .related-block h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px; color: var(--dark); margin: 10px 0 22px;
+    }
+    .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .related-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.07); transition: 0.4s; }
+    .related-card:hover { transform: translateY(-6px); box-shadow: 0 14px 34px rgba(0,0,0,0.12); }
+    .related-card img { width: 100%; height: 160px; object-fit: cover; }
+    .related-card .rc-body { padding: 16px 18px; }
+    .related-card .rc-date { font-size: 12px; color: var(--primary); font-weight: 600; margin-bottom: 8px; }
+    .related-card h4 { font-size: 16px; line-height: 1.4; color: var(--dark); }
+    .related-card h4 a:hover { color: var(--primary); }
+
+    /* Sidebar widgets */
+    .lf-widget { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 8px 26px rgba(0,0,0,0.07); margin-bottom: 25px; }
+    .lf-widget h4 { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--dark); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+    .lf-widget-search { display: flex; }
+    .lf-widget-search input { flex: 1; border: 1px solid #d1d5db; border-right: none; border-radius: 10px 0 0 10px; padding: 11px 14px; font-family: inherit; font-size: 14px; outline: none; }
+    .lf-widget-search input:focus { border-color: var(--primary); }
+    .lf-widget-search button { border: none; background: var(--primary); color: #fff; padding: 0 16px; border-radius: 0 10px 10px 0; cursor: pointer; }
+    .lf-cat-list li { border-bottom: 1px solid #f0f0f0; }
+    .lf-cat-list li:last-child { border-bottom: none; }
+    .lf-cat-list a { display: flex; justify-content: space-between; padding: 10px 0; color: var(--text); font-size: 14px; font-weight: 500; }
+    .lf-cat-list a:hover { color: var(--primary); padding-left: 5px; }
+    .lf-post { display: flex; gap: 12px; margin-bottom: 16px; }
+    .lf-post:last-child { margin-bottom: 0; }
+    .lf-post img { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .lf-post h5 { font-size: 14px; line-height: 1.4; color: var(--dark); margin-bottom: 4px; }
+    .lf-post h5 a:hover { color: var(--primary); }
+    .lf-post .lf-post-date { font-size: 12px; color: var(--text-light); }
+
+    @media (max-width: 600px) {
+        .article-title { font-size: 26px; }
+        .related-grid { grid-template-columns: 1fr; }
+    }
+</style>
+@endpush
+
 @section('content')
-    <!-- Blog Single Post -->
-    <section class="blog_post_container bgc-f7 pb30">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="breadcrumb_content style2">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('news') }}">News</a></li>
-                            <li class="breadcrumb-item active text-thm" aria-current="page">{{ \Illuminate\Support\Str::limit($news->title, 40) }}</li>
-                        </ol>
-                        <h2 class="breadcrumb_title">News & Articles</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="main_blog_post_content">
-                        <div class="mbp_thumb_post">
-                            <div class="blog_sp_tag"><a href="#">{{ $news->category->name ?? 'General' }}</a></div>
-                            <h3 class="blog_sp_title">{{ $news->title }}</h3>
-                            <ul class="blog_sp_post_meta">
-                                <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="author"></a></li>
-                                <li class="list-inline-item"><a href="#">Admin</a></li>
-                                <li class="list-inline-item"><span class="flaticon-calendar"></span></li>
-                                <li class="list-inline-item"><a href="#">{{ $news->created_at ? $news->created_at->format('F d, Y') : 'January 16, 2020' }}</a></li>
-                                <li class="list-inline-item"><span class="flaticon-view"></span></li>
-                                <li class="list-inline-item"><a href="#"> {{ $news->view_count ?? 341 }} views</a></li>
-                                <li class="list-inline-item"><span class="flaticon-chat"></span></li>
-                                <li class="list-inline-item"><a href="#">15</a></li>
-                            </ul>
-                            <div class="thumb">
-                                <img class="img-fluid" src="{{ route('imagecache', ['template' => 'original', 'filename' => $news->fi()]) }}" alt="{{ $news->title }}">
-                            </div>
-                            <div class="details">
-                                <p class="mb30">{{ $news->excerpt ?? '' }}</p>
-                                <div class="blog-content-area">
-                                    {!! $news->description_en ?? $news->description ?? '' !!}
-                                </div>
-                            </div>
-                            <ul class="blog_post_share">
-                                <li><p>Share</p></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="mbp_pagination_tab">
-                            <div class="row">
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="pag_prev">
-                                        @if(isset($relatedPosts) && $relatedPosts->count() > 0)
-                                            <a href="{{ route('singleNews', ['id' => $relatedPosts->first()->id]) }}"><span class="flaticon-back"></span></a>
-                                            <div class="detls"><h5>Previous Post</h5><p>{{ \Illuminate\Support\Str::limit($relatedPosts->first()->title, 30) }}</p></div>
-                                        @else
-                                            <a href="{{ route('news') }}"><span class="flaticon-back"></span></a>
-                                            <div class="detls"><h5>Previous Post</h5><p>All News</p></div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-lg-6">
-                                    <div class="pag_next text-right">
-                                        @if(isset($relatedPosts) && $relatedPosts->count() > 1)
-                                            <a href="{{ route('singleNews', ['id' => $relatedPosts->skip(1)->first()->id]) }}"><span class="flaticon-next"></span></a>
-                                            <div class="detls"><h5>Next Post</h5><p>{{ \Illuminate\Support\Str::limit($relatedPosts->skip(1)->first()->title, 30) }}</p></div>
-                                        @else
-                                            <a href="{{ route('news') }}"><span class="flaticon-next"></span></a>
-                                            <div class="detls"><h5>Next Post</h5><p>All News</p></div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product_single_content mb30">
-                            <div class="mbp_pagination_comments">
-                                <div class="total_review">
-                                    <h4>Comments</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bsp_reveiw_wrt">
-                            <h4>Write a Review</h4>
-                            <ul class="review_star">
-                                <li class="list-inline-item">
-                                    <span class="sspd_review">
-                                        <ul>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-                                        </ul>
-                                    </span>
-                                </li>
-                                <li class="list-inline-item pr15"><p>Your Rating & Review</p></li>
-                            </ul>
-                            <form class="comments_form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="review_title" placeholder="Review Title">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="review_message" rows="6" placeholder="Your Review"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-thm">Submit Review</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 mb20">
-                            <h4>Related Posts</h4>
-                        </div>
-                        @if(isset($relatedPosts) && $relatedPosts->count() > 0)
-                            @foreach($relatedPosts->take(2) as $post)
-                            <div class="col-md-6 col-lg-6">
-                                <div class="for_blog feat_property">
-                                    <div class="thumb">
-                                        <a href="{{ route('singleNews', ['id' => $post->id]) }}">
-                                            <img class="img-whp" src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $post->fi()]) }}" alt="{{ $post->title }}">
-                                        </a>
-                                        <div class="tag">{{ $post->category->name ?? 'General' }}</div>
-                                    </div>
-                                    <div class="details">
-                                        <div class="tc_content">
-                                            <h4><a href="{{ route('singleNews', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
-                                            <ul class="bpg_meta">
-                                                <li class="list-inline-item"><a href="#"><i class="flaticon-calendar"></i></a></li>
-                                                <li class="list-inline-item"><a href="#">{{ $post->created_at ? $post->created_at->format('F d, Y') : 'January 16, 2020' }}</a></li>
-                                            </ul>
-                                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($post->excerpt ?? ''), 100) }}</p>
-                                        </div>
-                                        <div class="fp_footer">
-                                            <ul class="fp_meta float-left mb0">
-                                                <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="author"></a></li>
-                                                <li class="list-inline-item"><a href="#">Admin</a></li>
-                                            </ul>
-                                            <a class="fp_pdate float-right text-thm" href="{{ route('singleNews', ['id' => $post->id]) }}">Read More <span class="flaticon-next"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        @else
-                            <div class="col-md-6 col-lg-6">
-                                <div class="for_blog feat_property">
-                                    <div class="thumb">
-                                        <img class="img-whp" src="{{ asset('frontend/images/blog/1.jpg') }}" alt="blog">
-                                        <div class="tag">General</div>
-                                    </div>
-                                    <div class="details">
-                                        <div class="tc_content">
-                                            <h4>Redfin Ranks the Most Competitive Neighborhoods of 2020</h4>
-                                            <ul class="bpg_meta">
-                                                <li class="list-inline-item"><a href="#"><i class="flaticon-calendar"></i></a></li>
-                                                <li class="list-inline-item"><a href="#">January 16, 2020</a></li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur text link libero tempus congue.</p>
-                                        </div>
-                                        <div class="fp_footer">
-                                            <ul class="fp_meta float-left mb0">
-                                                <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="author"></a></li>
-                                                <li class="list-inline-item"><a href="#">Admin</a></li>
-                                            </ul>
-                                            <a class="fp_pdate float-right text-thm" href="#">Read More <span class="flaticon-next"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <div class="for_blog feat_property">
-                                    <div class="thumb">
-                                        <img class="img-whp" src="{{ asset('frontend/images/blog/2.jpg') }}" alt="blog">
-                                        <div class="tag">General</div>
-                                    </div>
-                                    <div class="details">
-                                        <div class="tc_content">
-                                            <h4>Housing Markets That Changed the Most This Decade</h4>
-                                            <ul class="bpg_meta">
-                                                <li class="list-inline-item"><a href="#"><i class="flaticon-calendar"></i></a></li>
-                                                <li class="list-inline-item"><a href="#">January 16, 2020</a></li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur text link libero tempus congue.</p>
-                                        </div>
-                                        <div class="fp_footer">
-                                            <ul class="fp_meta float-left mb0">
-                                                <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/property/pposter1.png') }}" alt="author"></a></li>
-                                                <li class="list-inline-item"><a href="#">Admin</a></li>
-                                            </ul>
-                                            <a class="fp_pdate float-right text-thm" href="#">Read More <span class="flaticon-next"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="sidebar_search_widget">
-                        <div class="blog_search_widget">
-                            <form action="{{ route('news') }}" method="GET">
-                                <div class="input-group">
-                                    <input type="text" name="search" class="form-control" placeholder="Search Here" value="{{ request('search') }}" aria-label="Search" aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><span class="flaticon-magnifying-glass"></span></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="terms_condition_widget">
-                        <h4 class="title">Categories</h4>
-                        <div class="widget_list">
-                            <ul class="list_details">
-                                @if(isset($newsCategories) && $newsCategories->count() > 0)
-                                    @foreach($newsCategories as $cat)
-                                    <li>
-                                        <a href="{{ route('news', ['category' => $cat->id]) }}">
-                                            <i class="fa fa-caret-right mr10"></i>{{ $cat->name }} <span class="float-right">{{ $cat->posts_count ?? 0 }} posts</span>
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                @else
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>General <span class="float-right">6 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Real Estate <span class="float-right">12 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Construction <span class="float-right">8 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Market Trends <span class="float-right">26 posts</span></a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right mr10"></i>Investment <span class="float-right">89 posts</span></a></li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sidebar_feature_listing">
-                        <h4 class="title">Featured Listings</h4>
-                        @if(isset($featuredProperties) && $featuredProperties->count() > 0)
-                            @foreach($featuredProperties as $property)
-                            <div class="media">
-                                <img class="align-self-start mr-3" src="{{ asset('frontend/images/blog/fls' . (($loop->index % 3) + 1) . '.jpg') }}" alt="{{ $property->name ?? 'Property' }}">
-                                <div class="media-body">
-                                    <h5 class="mt-0 post_title">{{ $property->name ?? 'Property' }}</h5>
-                                    <a href="#">${{ number_format($property->final_price ?? 13000) }}/<small>/mo</small></a>
-                                    <ul class="mb0">
-                                        <li class="list-inline-item">Beds: {{ $property->bedrooms ?? 4 }}</li>
-                                        <li class="list-inline-item">Baths: {{ $property->bathrooms ?? 2 }}</li>
-                                        <li class="list-inline-item">Sq Ft: {{ $property->sqft ?? 5280 }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            @endforeach
-                        @else
-                            <div class="media">
-                                <img class="align-self-start mr-3" src="{{ asset('frontend/images/blog/fls1.jpg') }}" alt="fls1.jpg">
-                                <div class="media-body">
-                                    <h5 class="mt-0 post_title">Nice Room With View</h5>
-                                    <a href="#">$13,000/<small>/mo</small></a>
-                                    <ul class="mb0">
-                                        <li class="list-inline-item">Beds: 4</li>
-                                        <li class="list-inline-item">Baths: 2</li>
-                                        <li class="list-inline-item">Sq Ft: 5280</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <img class="align-self-start mr-3" src="{{ asset('frontend/images/blog/fls2.jpg') }}" alt="fls2.jpg">
-                                <div class="media-body">
-                                    <h5 class="mt-0 post_title">Villa called Archangel</h5>
-                                    <a href="#">$13,000<small>/mo</small></a>
-                                    <ul class="mb0">
-                                        <li class="list-inline-item">Beds: 4</li>
-                                        <li class="list-inline-item">Baths: 2</li>
-                                        <li class="list-inline-item">Sq Ft: 5280</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <img class="align-self-start mr-3" src="{{ asset('frontend/images/blog/fls3.jpg') }}" alt="fls3.jpg">
-                                <div class="media-body">
-                                    <h5 class="mt-0 post_title">Sunset Studio</h5>
-                                    <a href="#">$13,000<small>/mo</small></a>
-                                    <ul class="mb0">
-                                        <li class="list-inline-item">Beds: 4</li>
-                                        <li class="list-inline-item">Baths: 2</li>
-                                        <li class="list-inline-item">Sq Ft: 5280</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="blog_tag_widget">
-                        <h4 class="title">Tags</h4>
-                        <ul class="tag_list">
-                            <li class="list-inline-item"><a href="#">Apartment</a></li>
-                            <li class="list-inline-item"><a href="#">Real Estate</a></li>
-                            <li class="list-inline-item"><a href="#">Estate</a></li>
-                            <li class="list-inline-item"><a href="#">Luxury</a></li>
-                            <li class="list-inline-item"><a href="#">Investment</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <h1>Article Details</h1>
+        <div class="breadcrumb">
+            <a href="{{ url('/') }}">Home</a> &raquo;
+            <a href="{{ route('news') }}">News</a> &raquo; {{ \Illuminate\Support\Str::limit($news->title, 40) }}
         </div>
     </section>
+
+    <!-- Detail Wrapper -->
+    <div class="pd-wrapper">
+
+        <!-- Main Column -->
+        <div class="pd-main">
+
+            <span class="article-cat">{{ $news->category->name ?? 'General' }}</span>
+            <h1 class="article-title">{{ $news->title }}</h1>
+            <div class="article-meta">
+                <span><i class="fa-regular fa-user"></i> Admin</span>
+                <span><i class="fa-regular fa-calendar"></i> {{ $news->created_at ? $news->created_at->format('F d, Y') : '' }}</span>
+                <span><i class="fa-regular fa-eye"></i> {{ $news->view_count ?? 0 }} views</span>
+            </div>
+
+            <div class="article-hero">
+                <img src="{{ route('imagecache', ['template' => 'original', 'filename' => $news->fi()]) }}" alt="{{ $news->title }}">
+            </div>
+
+            @if(!empty($news->excerpt))
+            <p class="article-excerpt">{{ $news->excerpt }}</p>
+            @endif
+
+            <div class="article-body">
+                {!! $news->description_en ?? $news->description ?? '' !!}
+            </div>
+
+            <!-- Share -->
+            <div class="article-share">
+                <span>Share:</span>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+
+            <!-- Related Posts -->
+            @if(isset($relatedPosts) && $relatedPosts->count() > 0)
+            <div class="related-block">
+                <h2>Related Articles</h2>
+                <div class="related-grid">
+                    @foreach($relatedPosts->take(2) as $post)
+                    <div class="related-card">
+                        <a href="{{ route('singleNews', ['id' => $post->id]) }}">
+                            <img src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $post->fi()]) }}" alt="{{ $post->title }}">
+                        </a>
+                        <div class="rc-body">
+                            <div class="rc-date"><i class="fa-regular fa-calendar"></i> {{ $post->created_at ? $post->created_at->format('M d, Y') : '' }}</div>
+                            <h4><a href="{{ route('singleNews', ['id' => $post->id]) }}">{{ \Illuminate\Support\Str::limit($post->title, 60) }}</a></h4>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="pd-sidebar">
+
+            <!-- Search -->
+            <div class="lf-widget">
+                <h4>Search</h4>
+                <form class="lf-widget-search" action="{{ route('news') }}" method="GET">
+                    <input type="text" name="search" placeholder="Search articles..." value="{{ request('search') }}">
+                    <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            <!-- Categories -->
+            @if(isset($newsCategories) && $newsCategories->count() > 0)
+            <div class="lf-widget">
+                <h4>Categories</h4>
+                <ul class="lf-cat-list">
+                    @foreach($newsCategories as $cat)
+                    <li>
+                        <a href="{{ route('news', ['category' => $cat->id]) }}">
+                            <span>{{ $cat->name }}</span>
+                            <span>{{ $cat->posts_count ?? 0 }}</span>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            <!-- Latest Posts -->
+            @if(isset($latestPosts) && $latestPosts->count() > 0)
+            <div class="lf-widget">
+                <h4>Latest Articles</h4>
+                @foreach($latestPosts->take(5) as $post)
+                <div class="lf-post">
+                    <a href="{{ route('singleNews', ['id' => $post->id]) }}">
+                        <img src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $post->fi()]) }}" alt="{{ $post->title }}">
+                    </a>
+                    <div>
+                        <h5><a href="{{ route('singleNews', ['id' => $post->id]) }}">{{ \Illuminate\Support\Str::limit($post->title, 50) }}</a></h5>
+                        <div class="lf-post-date"><i class="fa-regular fa-calendar"></i> {{ $post->created_at ? $post->created_at->format('M d, Y') : '' }}</div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
+
+        </aside>
+
+    </div>
+
 @endsection
